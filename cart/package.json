@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is a child MFE cart app used for MFE built app.",
   "main": "./dist/Cart.js",
+  "private": false,
   "scripts": {
     "start": "webpack serve --config config/webpack.dev.js",
     "build": "rm -rf dist/ && webpack --config config/webpack.prod.js"

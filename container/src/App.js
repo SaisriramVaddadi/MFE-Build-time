@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Typography, AppBar } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import ProductCatalog from "./ProductsCatalog";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 
 export default () => {
   return (
@@ -17,8 +17,8 @@ export default () => {
           left: 0,
           right: 0,
           background: "white",
-          padding: '1rem',
-          boxShadow: "0px 5px 5px 2px rgba(0,0,0,0.17)"
+          padding: "1rem",
+          boxShadow: "0px 5px 5px 2px rgba(0,0,0,0.17)",
         }}
       >
         <Link to="/">
@@ -31,9 +31,9 @@ export default () => {
         </Link>
       </header>
       <hr />
-      <Switch>
-        <Route path="/" component={ProductCatalog} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<ProductCatalog />} />
+      </Routes>
 
       <hr />
 
