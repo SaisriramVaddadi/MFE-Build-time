@@ -10,26 +10,26 @@ import {
   Container,
 } from "@mui/material";
 
-export default function ProductList() {
+export default function ProductCatalog() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-      const productList = JSON.parse(localStorage.getItem("products")) || [];
-      console.log(localStorage.getItem("products"));
+    (async () => {
+      const response = await fetch("https://fakestoreapi.com/products");
+      const productList = await response.json();
       setProducts(productList);
+    })();
   }, []);
 
-  const removeFromCart = (product) => () => {
-    const currentAddedProducts =
-      JSON.parse(localStorage.getItem("products")) || [];
-    const newProducts = currentAddedProducts.filter((p) => p.id !== product.id);
-    setProducts(newProducts);
-    localStorage.setItem("products", JSON.stringify(newProducts));
-  };
+  const addToCart = (product) => {
+    const currentAddedProducts = JSON.parse(localStorage.getItem('products')) || [];
+    console.log(currentAddedProducts);
+    localStorage.setItem('products', JSON.stringify([...currentAddedProducts, product]));
+  }
 
   return (
     <React.Fragment>
-      <main style={{marginTop: "7rem"}}>
+      <main style={{marginTop: "6rem"}}>
         <Container className="cardGrid">
           {products.length > 0 ? (
             <Grid container spacing={4}>
@@ -52,9 +52,9 @@ export default function ProductList() {
                       <Button
                         size="small"
                         color="primary"
-                        onClick={() => removeFromCart(product)}
+                        onClick={()=>addToCart(product)}
                       >
-                        Remove from Cart
+                        Add to Cart
                       </Button>
                     </CardActions>
                   </Card>
@@ -62,7 +62,7 @@ export default function ProductList() {
               ))}
             </Grid>
           ) : (
-            <h3>Cart is Empty </h3>
+            <h3>No Products available</h3>
           )}
         </Container>
       </main>

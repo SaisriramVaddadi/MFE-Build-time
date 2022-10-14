@@ -1,14 +1,13 @@
 export * from './ProductList';
-
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { StylesProvider } from '@material-ui/core/styles';
-
+import ReactDOM from 'react-dom/client';
 import ProductList from './ProductList';
 
-ReactDOM.render(
-  <StylesProvider>
+
+const root = ReactDOM.createRoot(document.getElementById("cart-dev-root"));
+
+root.render(
+  <React.StrictMode>
     <ProductList />
-  </StylesProvider>,
-  document.querySelector('#cart-dev-root')
+  </React.StrictMode>,
 );

@@ -1,36 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-
-import Catalog from '@mfe-patterns/catalog';
-import Cart from '@mfe-patterns/cart';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
-
-const useStyles = makeStyles((theme) => ({
-  header: {
-    padding: '15px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
-}));
+import React from "react";
+import { Link } from "react-router-dom";
+import { Button, Typography, AppBar } from "@mui/material";
+import ProductCatalog from "./ProductsCatalog";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 
 export default () => {
-
-  const classes = useStyles();
   return (
     <BrowserRouter>
-      <header className={classes.header}>
+      <header
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          background: "white",
+          padding: '1rem',
+          boxShadow: "0px 5px 5px 2px rgba(0,0,0,0.17)"
+        }}
+      >
         <Link to="/">
-          <Typography variant="h4" >
-            FooBar.com
-          </Typography>
+          <Typography variant="h4">FooBar.com</Typography>
         </Link>
         <Link to="/cart">
           <Button variant="contained" color="primary">
@@ -38,17 +30,14 @@ export default () => {
           </Button>
         </Link>
       </header>
-
       <hr />
-
       <Switch>
-        <Route path="/cart" component={Cart} />
-        <Route path="/" component={Catalog} />
+        <Route path="/" component={ProductCatalog} />
       </Switch>
 
       <hr />
 
-      <footer className={classes.footer}>
+      <footer>
         <Typography variant="h6" align="center" gutterBottom>
           Footer
         </Typography>
@@ -61,6 +50,6 @@ export default () => {
           Something here to give the footer a purpose!
         </Typography>
       </footer>
-    </BrowserRouter >
-  )
-}
+    </BrowserRouter>
+  );
+};
