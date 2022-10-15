@@ -17,6 +17,7 @@ const devConfig = {
     filename: 'Cart.js',
     libraryTarget: 'commonjs2',
   },
+  
   resolve: {
     alias: {
       'react': path.resolve(__dirname, './node_modules/react'),

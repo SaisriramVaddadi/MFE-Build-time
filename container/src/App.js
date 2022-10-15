@@ -1,8 +1,15 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Link } from "react-router-dom";
-import { Button, Typography } from "@mui/material";
 import ProductCatalog from "./ProductsCatalog";
+import Cart from "cart-mfe";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
+
+
+const CartMFE = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Cart/>
+  </Suspense>
+)
 
 export default () => {
   return (
@@ -12,44 +19,41 @@ export default () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          alignItems: "center",
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           background: "white",
-          padding: "1rem",
+          padding: "0.5rem 1rem",
           boxShadow: "0px 5px 5px 2px rgba(0,0,0,0.17)",
         }}
       >
         <Link to="/">
-          <Typography variant="h4">FooBar.com</Typography>
+          <h4 variant="h4">Amacart</h4>
         </Link>
         <Link to="/cart">
-          <Button variant="contained" color="primary">
+          <button
+            style={{
+              border: "none",
+              padding: "0.5rem",
+              background: "steelblue",
+              color: "white",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
             Go to Cart
-          </Button>
+          </button>
         </Link>
       </header>
       <hr />
       <Routes>
         <Route path="/" element={<ProductCatalog />} />
+        <Route path="/cart" element={<CartMFE />} />
       </Routes>
 
       <hr />
-
-      <footer>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
-      </footer>
     </BrowserRouter>
   );
 };

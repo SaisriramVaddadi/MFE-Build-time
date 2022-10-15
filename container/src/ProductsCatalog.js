@@ -1,14 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  Typography,
-  Container,
-} from "@mui/material";
 
 export default function ProductCatalog() {
   const [products, setProducts] = useState([]);
@@ -22,49 +12,73 @@ export default function ProductCatalog() {
   }, []);
 
   const addToCart = (product) => {
-    const currentAddedProducts = JSON.parse(localStorage.getItem('products')) || [];
+    const currentAddedProducts =
+      JSON.parse(localStorage.getItem("products")) || [];
     console.log(currentAddedProducts);
-    localStorage.setItem('products', JSON.stringify([...currentAddedProducts, product]));
-  }
+    localStorage.setItem(
+      "products",
+      JSON.stringify([...currentAddedProducts, product])
+    );
+  };
 
   return (
     <React.Fragment>
-      <main style={{marginTop: "6rem"}}>
-        <Container className="cardGrid">
+      <main style={{ marginTop: "7rem", padding: "0.5rem 1rem" }}>
           {products.length > 0 ? (
-            <Grid container spacing={4}>
-              {products.map((product) => (
-                <Grid item key={product.id} xs={12} sm={6} md={4}>
-                  <Card sx={{height: '100%', display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
-                    <CardMedia
-                      component="img"
-                      height="194"
-                      image={product.image}
-                      title={product.title}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h6" component="h3">
-                        {product.title}
-                      </Typography>
-                      <Typography sx={{fontSize: '1rem'}}>{product.description}</Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={()=>addToCart(product)}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, minmax(0,1fr))",
+                rowGap: "3rem",
+                columnGap: "2rem",
+              }}
+            >
+              {products.map((product, index) => (
+                <div
+                  style={{
+                    border: "1px solid lightgray",
+                    padding: "1rem",
+                    borderRadius: "5px",
+                  }}
+                  key={index}
+                >
+                  <div
+                    style={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <img height="120" src={product.image} alt={product.title} />
+                    <div>
+                      <h6>{product.title}</h6>
+                      <p style={{ fontSize: "1rem", wordWrap: "break-word" }}>
+                        {product.description}
+                      </p>
+                    </div>
+                    <div>
+                      <button
+                        style={{
+                          border: "none",
+                          padding: "0.5rem",
+                          background: "steelblue",
+                          color: "white",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => addToCart(product)}
                       >
                         Add to Cart
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               ))}
-            </Grid>
+            </div>
           ) : (
-            <h3>No Products available</h3>
+            <h3>Loading...</h3>
           )}
-        </Container>
       </main>
     </React.Fragment>
   );
