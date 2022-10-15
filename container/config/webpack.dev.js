@@ -5,11 +5,10 @@ const commonConfig = require('./webpack.common');
 
 const devConfig = {
   mode: 'development',
+  // devtool: "eval-cheap-module-source-map",
   devServer: {
     port: 8080,
-    historyApiFallback: {
-      index: 'index.html'
-    }
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWelpackPlugin({
